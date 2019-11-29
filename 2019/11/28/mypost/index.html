@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="mypost, Golang学习记录">
-    <meta name="description" content="mypost | Golang学习记录">
+    <meta name="keywords" content="golang中的反射, Golang学习记录">
+    <meta name="description" content="#编程语言中反射的概念##在计算机科学领域，反射是指一类应用，它们能够自描述和自控制。也就是说，这类应用通过采用某种机制来实现对自己行为的描述（self-representation）和监测（examination），并能根据自身行为的状态">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>mypost | Golang学习记录</title>
+    <title>golang中的反射 | Golang学习记录</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -278,13 +278,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        mypost
+                        golang中的反射
                     </div>
                 </div>
             </div>
@@ -403,7 +403,185 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>#编程语言中反射的概念<br>##在计算机科学领域，反射是指一类应用，它们能够自描述和自控制。也就是说，这类应用通过采用某种机制来实现对自己行为的描述（self-representation）和监测（examination），并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。<br>每种语言的反射模型都不同，并且有些语言根本不支持反射。Golang语言实现了反射，反射机制就是在运行时动态的调用对象的方法和属性，官方自带的reflect包就是反射相关的，只要包含这个包就可以使用。<br>多插一句，Golang的gRPC也是通过反射实现的。<br>interface 和 反射<br>在讲反射之前，先来看看Golang关于类型设计的一些原则</p>
+<p>变量包括（type, value）两部分</p>
+<p>理解这一点就知道为什么nil != nil了</p>
+<p>type 包括 static type和concrete type. 简单来说 static type是你在编码是看见的类型(如int、string)，concrete type是runtime系统看见的类型</p>
+<p>类型断言能否成功，取决于变量的concrete type，而不是static type. 因此，一个 reader变量如果它的concrete type也实现了write方法的话，它也可以被类型断言为writer.</p>
+<p>接下来要讲的反射，就是建立在类型之上的，Golang的指定类型的变量的类型是静态的（也就是指定int、string这些的变量，它的type是static type），在创建变量的时候就已经确定，反射主要与Golang的interface类型相关（它的type是concrete type），只有interface类型才有反射一说。<br>在Golang的实现中，每个interface变量都有一个对应pair，pair中记录了实际变量的值和类型:<br>(value, type)<br>复制代码value是实际变量值，type是实际变量的类型。一个interface{}类型的变量包含了2个指针，一个指针指向值的类型【对应concrete type】，另外一个指针指向实际的值【对应value】。<br>例如，创建类型为*os.File的变量，然后将其赋给一个接口变量r：<br>tty, err := os.OpenFile(“/dev/tty”, os.O_RDWR, 0)</p>
+<p>var r io.Reader<br>r = tty<br>复制代码接口变量r的pair中将记录如下信息：(tty, *os.File)，这个pair在接口变量的连续赋值过程中是不变的，将接口变量r赋给另一个接口变量w:<br>var w io.Writer<br>w = r.(io.Writer)<br>复制代码接口变量w的pair与r的pair相同，都是:(tty, *os.File)，即使w是空接口类型，pair也是不变的。<br>interface及其pair的存在，是Golang中实现反射的前提，理解了pair，就更容易理解反射。反射就是用来检测存储在接口变量内部(值value；类型concrete type) pair对的一种机制。<br>Golang的反射reflect<br>reflect的基本功能TypeOf和ValueOf<br>既然反射就是用来检测存储在接口变量内部(值value；类型concrete type) pair对的一种机制。那么在Golang的reflect反射包中有什么样的方式可以让我们直接获取到变量内部的信息呢？ 它提供了两种类型（或者说两个方法）让我们可以很容易的访问接口变量内容，分别是reflect.ValueOf() 和 reflect.TypeOf()，看看官方的解释<br>// ValueOf returns a new Value initialized to the concrete value<br>// stored in the interface i.  ValueOf(nil) returns the zero<br>func ValueOf(i interface{}) Value {…}</p>
+<p>翻译一下：ValueOf用来获取输入参数接口中的数据的值，如果接口为空则返回0</p>
+<p>// TypeOf returns the reflection Type that represents the dynamic type of i.<br>// If i is a nil interface value, TypeOf returns nil.<br>func TypeOf(i interface{}) Type {…}</p>
+<p>翻译一下：TypeOf用来动态获取输入参数接口中的值的类型，如果接口为空则返回nil</p>
+<p>复制代码reflect.TypeOf()是获取pair中的type，reflect.ValueOf()获取pair中的value，示例如下：<br>    package main</p>
+<pre><code>import (
+&quot;fmt&quot;
+&quot;reflect&quot;
+)
+
+func main() {
+var num float64 = 1.2345
+
+fmt.Println(&quot;type: &quot;, reflect.TypeOf(num))
+fmt.Println(&quot;value: &quot;, reflect.ValueOf(num))
+}</code></pre><p>运行结果：<br>type:  float64<br>value:  1.2345<br>复制代码说明</p>
+<p>reflect.TypeOf： 直接给到了我们想要的type类型，如float64、int、各种pointer、struct 等等真实的类型</p>
+<p>reflect.ValueOf：直接给到了我们想要的具体的值，如1.2345这个具体数值，或者类似&amp;{1 “Allen.Wu” 25} 这样的结构体struct的值</p>
+<p>也就是说明反射可以将“接口类型变量”转换为“反射类型对象”，反射类型指的是reflect.Type和reflect.Value这两种</p>
+<p>从relfect.Value中获取接口interface的信息<br>当执行reflect.ValueOf(interface)之后，就得到了一个类型为”relfect.Value”变量，可以通过它本身的Interface()方法获得接口变量的真实内容，然后可以通过类型判断进行转换，转换为原有真实类型。不过，我们可能是已知原有类型，也有可能是未知原有类型，因此，下面分两种情况进行说明。<br>已知原有类型【进行“强制转换”】<br>已知类型后转换为其对应的类型的做法如下，直接通过Interface方法然后强制转换，如下：<br>realValue := value.Interface().(已知的类型)<br>复制代码示例如下：<br>package main</p>
+<pre><code>import (
+&quot;fmt&quot;
+&quot;reflect&quot;
+)
+
+func main() {
+var num float64 = 1.2345
+
+pointer := reflect.ValueOf(&amp;num)
+value := reflect.ValueOf(num)
+
+// 可以理解为“强制转换”，但是需要注意的时候，转换的时候，如果转换的类型不完全符合，则直接panic
+// Golang 对类型要求非常严格，类型一定要完全符合
+// 如下两个，一个是*float64，一个是float64，如果弄混，则会panic
+convertPointer := pointer.Interface().(*float64)
+convertValue := value.Interface().(float64)
+
+fmt.Println(convertPointer)
+fmt.Println(convertValue)
+}</code></pre><p>运行结果：<br>0xc42000e238<br>1.2345<br>复制代码说明</p>
+<p>转换的时候，如果转换的类型不完全符合，则直接panic，类型要求非常严格！<br>转换的时候，要区分是指针还是指<br>也就是说反射可以将“反射类型对象”再重新转换为“接口类型变量”</p>
+<p>未知原有类型【遍历探测其Filed】<br>很多情况下，我们可能并不知道其具体类型，那么这个时候，该如何做呢？需要我们进行遍历探测其Filed来得知，示例如下:<br>package main</p>
+<pre><code>import (
+&quot;fmt&quot;
+&quot;reflect&quot;
+)
+
+type User struct {
+Id   int
+Name string
+Age  int
+}
+
+func (u User) ReflectCallFunc() {
+fmt.Println(&quot;Allen.Wu ReflectCallFunc&quot;)
+}
+
+func main() {
+
+user := User{1, &quot;Allen.Wu&quot;, 25}
+
+DoFiledAndMethod(user)
+
+}</code></pre><p>// 通过接口来获取任意参数，然后一一揭晓<br>func DoFiledAndMethod(input interface{}) {</p>
+<pre><code>getType := reflect.TypeOf(input)
+fmt.Println(&quot;get Type is :&quot;, getType.Name())
+
+getValue := reflect.ValueOf(input)
+fmt.Println(&quot;get all Fields is:&quot;, getValue)
+
+// 获取方法字段
+// 1. 先获取interface的reflect.Type，然后通过NumField进行遍历
+// 2. 再通过reflect.Type的Field获取其Field
+// 3. 最后通过Field的Interface()得到对应的value
+for i := 0; i &lt; getType.NumField(); i++ {
+    field := getType.Field(i)
+    value := getValue.Field(i).Interface()
+    fmt.Printf(&quot;%s: %v = %v\n&quot;, field.Name, field.Type, value)
+}
+
+// 获取方法
+// 1. 先获取interface的reflect.Type，然后通过.NumMethod进行遍历
+for i := 0; i &lt; getType.NumMethod(); i++ {
+    m := getType.Method(i)
+    fmt.Printf(&quot;%s: %v\n&quot;, m.Name, m.Type)
+}</code></pre><p>}</p>
+<p>运行结果：<br>get Type is : User<br>get all Fields is: {1 Allen.Wu 25}<br>Id: int = 1<br>Name: string = Allen.Wu<br>Age: int = 25<br>ReflectCallFunc: func(main.User)</p>
+<p>复制代码说明<br>通过运行结果可以得知获取未知类型的interface的具体变量及其类型的步骤为：</p>
+<p>先获取interface的reflect.Type，然后通过NumField进行遍历<br>再通过reflect.Type的Field获取其Field<br>最后通过Field的Interface()得到对应的value</p>
+<p>通过运行结果可以得知获取未知类型的interface的所属方法（函数）的步骤为：</p>
+<p>先获取interface的reflect.Type，然后通过NumMethod进行遍历<br>再分别通过reflect.Type的Method获取对应的真实的方法（函数）<br>最后对结果取其Name和Type得知具体的方法名<br>也就是说反射可以将“反射类型对象”再重新转换为“接口类型变量”<br>struct 或者 struct 的嵌套都是一样的判断处理方式</p>
+<p>通过reflect.Value设置实际变量的值<br>reflect.Value是通过reflect.ValueOf(X)获得的，只有当X是指针的时候，才可以通过reflec.Value修改实际变量X的值，即：要修改反射类型的对象就一定要保证其值是“addressable”的。<br>示例如下：<br>package main</p>
+<p>import (<br>    “fmt”<br>    “reflect”<br>)</p>
+<p>func main() {</p>
+<pre><code>var num float64 = 1.2345
+fmt.Println(&quot;old value of pointer:&quot;, num)
+
+// 通过reflect.ValueOf获取num中的reflect.Value，注意，参数必须是指针才能修改其值
+pointer := reflect.ValueOf(&amp;num)
+newValue := pointer.Elem()
+
+fmt.Println(&quot;type of pointer:&quot;, newValue.Type())
+fmt.Println(&quot;settability of pointer:&quot;, newValue.CanSet())
+
+// 重新赋值
+newValue.SetFloat(77)
+fmt.Println(&quot;new value of pointer:&quot;, num)
+
+////////////////////
+// 如果reflect.ValueOf的参数不是指针，会如何？
+pointer = reflect.ValueOf(num)
+//newValue = pointer.Elem() // 如果非指针，这里直接panic，“panic: reflect: call of reflect.Value.Elem on float64 Value”</code></pre><p>}</p>
+<p>运行结果：<br>old value of pointer: 1.2345<br>type of pointer: float64<br>settability of pointer: true<br>new value of pointer: 77<br>复制代码说明</p>
+<p>需要传入的参数是* float64这个指针，然后可以通过pointer.Elem()去获取所指向的Value，注意一定要是指针。<br>如果传入的参数不是指针，而是变量，那么</p>
+<p>通过Elem获取原始值对应的对象则直接panic<br>通过CanSet方法查询是否可以设置返回false</p>
+<p>newValue.CantSet()表示是否可以重新设置其值，如果输出的是true则可修改，否则不能修改，修改完之后再进行打印发现真的已经修改了。<br>reflect.Value.Elem() 表示获取原始值对应的反射对象，只有原始对象才能修改，当前反射对象是不能修改的<br>也就是说如果要修改反射类型对象，其值必须是“addressable”【对应的要传入的是指针，同时要通过Elem方法获取原始值对应的反射对象】<br>struct 或者 struct 的嵌套都是一样的判断处理方式</p>
+<p>通过reflect.ValueOf来进行方法的调用<br>这算是一个高级用法了，前面我们只说到对类型、变量的几种反射的用法，包括如何获取其值、其类型、如果重新设置新值。但是在工程应用中，另外一个常用并且属于高级的用法，就是通过reflect来进行方法【函数】的调用。比如我们要做框架工程的时候，需要可以随意扩展方法，或者说用户可以自定义方法，那么我们通过什么手段来扩展让用户能够自定义呢？关键点在于用户的自定义方法是未可知的，因此我们可以通过reflect来搞定<br>示例如下：<br>package main</p>
+<pre><code>import (
+&quot;fmt&quot;
+&quot;reflect&quot;
+)
+
+type User struct {
+Id   int
+Name string
+Age  int
+}
+
+func (u User) ReflectCallFuncHasArgs(name string, age int) {
+fmt.Println(&quot;ReflectCallFuncHasArgs name: &quot;, name, &quot;, age:&quot;, age, &quot;and origal User.Name:&quot;, u.Name)
+}
+
+func (u User) ReflectCallFuncNoArgs() {
+fmt.Println(&quot;ReflectCallFuncNoArgs&quot;)
+}</code></pre><p>// 如何通过反射来进行方法的调用？<br>// 本来可以用u.ReflectCallFuncXXX直接调用的，但是如果要通过反射，那么首先要将方法注册，也就是MethodByName，然后通过反射调动mv.Call</p>
+<pre><code>func main() {
+user := User{1, &quot;Allen.Wu&quot;, 25}
+
+// 1. 要通过反射来调用起对应的方法，必须要先通过reflect.ValueOf(interface)来获取到reflect.Value，得到“反射类型对象”后才能做下一步处理
+getValue := reflect.ValueOf(user)
+
+// 一定要指定参数为正确的方法名
+// 2. 先看看带有参数的调用方法
+methodValue := getValue.MethodByName(&quot;ReflectCallFuncHasArgs&quot;)
+args := []reflect.Value{reflect.ValueOf(&quot;wudebao&quot;), reflect.ValueOf(30)}
+methodValue.Call(args)
+
+// 一定要指定参数为正确的方法名
+// 3. 再看看无参数的调用方法
+methodValue = getValue.MethodByName(&quot;ReflectCallFuncNoArgs&quot;)
+args = make([]reflect.Value, 0)
+methodValue.Call(args)</code></pre><p>}</p>
+<p>运行结果：<br>ReflectCallFuncHasArgs name:  wudebao , age: 30 and origal User.Name: Allen.Wu<br>ReflectCallFuncNoArgs</p>
+<p>复制代码说明</p>
+<p>要通过反射来调用起对应的方法，必须要先通过reflect.ValueOf(interface)来获取到reflect.Value，得到“反射类型对象”后才能做下一步处理</p>
+<p>reflect.Value.MethodByName这.MethodByName，需要指定准确真实的方法名字，如果错误将直接panic，MethodByName返回一个函数值对应的reflect.Value方法的名字。</p>
+<p>[]reflect.Value，这个是最终需要调用的方法的参数，可以没有或者一个或者多个，根据实际参数来定。</p>
+<p>reflect.Value的 Call 这个方法，这个方法将最终调用真实的方法，参数务必保持一致，如果reflect.Value’Kind不是一个方法，那么将直接panic。</p>
+<p>本来可以用u.ReflectCallFuncXXX直接调用的，但是如果要通过反射，那么首先要将方法注册，也就是MethodByName，然后通过反射调用methodValue.Call</p>
+<p>Golang的反射reflect性能<br>Golang的反射很慢，这个和它的API设计有关。在 java 里面，我们一般使用反射都是这样来弄的。<br>Field field = clazz.getField(“hello”);<br>field.get(obj1);<br>field.get(obj2);<br>复制代码这个取得的反射对象类型是 java.lang.reflect.Field。它是可以复用的。只要传入不同的obj，就可以取得这个obj上对应的 field。<br>但是Golang的反射不是这样设计的:<br>type_ := reflect.TypeOf(obj)<br>field, _ := type_.FieldByName(“hello”)<br>复制代码这里取出来的 field 对象是 reflect.StructField 类型，但是它没有办法用来取得对应对象上的值。如果要取值，得用另外一套对object，而不是type的反射<br>type_ := reflect.ValueOf(obj)<br>fieldValue := type_.FieldByName(“hello”)<br>复制代码这里取出来的 fieldValue 类型是 reflect.Value，它是一个具体的值，而不是一个可复用的反射对象了，每次反射都需要malloc这个reflect.Value结构体，并且还涉及到GC。<br>小结<br>Golang reflect慢主要有两个原因</p>
+<p>涉及到内存分配以及后续的GC；</p>
+<p>reflect实现里面有大量的枚举，也就是for循环，比如类型之类的。</p>
+<p>总结<br>上述详细说明了Golang的反射reflect的各种功能和用法，都附带有相应的示例，相信能够在工程应用中进行相应实践，总结一下就是：</p>
+<p>反射可以大大提高程序的灵活性，使得interface{}有更大的发挥余地</p>
+<p>反射必须结合interface才玩得转<br>变量的type要是concrete type的（也就是interface变量）才有反射一说</p>
+<p>反射可以将“接口类型变量”转换为“反射类型对象”</p>
+<p>反射使用 TypeOf 和 ValueOf 函数从接口中获取目标对象信息</p>
+<p>反射可以将“反射类型对象”转换为“接口类型变量</p>
+<p>reflect.value.Interface().(已知的类型)<br>遍历reflect.Type的Field获取其Field</p>
+<p>反射可以修改反射类型对象，但是其值必须是“addressable”</p>
+<p>想要利用反射修改对象状态，前提是 interface.data 是 settable,即 pointer-interface</p>
+<p>通过反射可以“动态”调用方法<br>因为Golang本身不支持模板，因此在以往需要使用模板的场景下往往就需要使用反射(reflect)来实现</p>
+
             </div>
             <hr/>
 
@@ -543,7 +721,7 @@
                     </span>
                     <a href="https://moschao.github.io" class="b-link-green">Golang学习记录</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/11/28/mypost/" class="b-link-green">mypost</a>
+                    <a href="/2019/11/28/mypost/" class="b-link-green">golang中的反射</a>
                 </p>
             </div>
         </div>
@@ -573,13 +751,13 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="mypost">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="golang中的反射">
                         
-                        <span class="card-title">mypost</span>
+                        <span class="card-title">golang中的反射</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary"></div>
+                    <div class="summary">#编程语言中反射的概念##在计算机科学领域，反射是指一类应用，它们能够自描述和自控制。也就是说，这类应用通过采用某种机制来实现对自己行为的描述（self-representation）和监测（examination），并能根据自身行为的状态</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-28

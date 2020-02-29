@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>golang</title>
+      <link href="/2020/02/29/golang/"/>
+      <url>/2020/02/29/golang/</url>
+      
+        <content type="html"><![CDATA[<h1 id="golang的基本语法"><a href="#golang的基本语法" class="headerlink" title="golang的基本语法"></a>golang的基本语法</h1><h2 id="变量的来历"><a href="#变量的来历" class="headerlink" title="变量的来历"></a>变量的来历</h2><p>程序运行过程中的数据都是保存在内存中，我们想要在代码中操作某个数据时就需要去内存上找到这个变量，但是如果我们直接在代码中通过内存地址去操作变量的话，代码的可读性会非常差而且还容易出错，所以我们就利用变量将这个数据的内存地址保存起来，以后直接通过这个变量就能找到内存上对应的数据了。</p><h2 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h2><pre class="line-numbers language-bash"><code class="language-bash">$ 变量（Variable）的功能是存储数据。不同的变量保存的数据类型可能会不一样。经过半个多世纪的发展，编程语言已经基本形成了一套固定的类型，常见变量的数据类型有：整型、浮点型、布尔型等。Go语言中的每一个变量都有自己的类型，并且变量必须经过声明才能开始使用。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><pre><code>import &quot;sync&quot;import &quot;sync/atomic&quot;var initialized uint32... // 此处省略func GetInstance() *singleton {if atomic.LoadUInt32(&amp;initialized) == 1 {  // 原子操作         return instance  }mu.Lock()defer mu.Unlock()if initialized == 0 {     instance = &amp;singleton{}     atomic.StoreUint32(&amp;initialized, 1)}return instance</code></pre><p>}</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2019/11/28/hello-world/"/>
       <url>/2019/11/28/hello-world/</url>

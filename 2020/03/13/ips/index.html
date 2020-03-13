@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="golang, Java,c,c++,golang,HTML,CSS,JavaScript,JQuery,React,Vue.js,Springboot,beego等">
+    <meta name="keywords" content="ips, Java,c,c++,golang,HTML,CSS,JavaScript,JQuery,React,Vue.js,Springboot,beego等">
     <meta name="description" content="Web,信息安全,分享知识,提升能力">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>golang | Web编程实训记录</title>
+    <title>ips | Web编程实训记录</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -305,12 +305,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">golang</h1>
+                    <h1 class="description center-align post-title">ips</h1>
                 </div>
             </div>
         </div>
@@ -439,7 +439,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-02-29
+                    2020-03-13
                 </div>
                 
 
@@ -456,31 +456,77 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="golang的基本语法"><a href="#golang的基本语法" class="headerlink" title="golang的基本语法"></a>golang的基本语法</h1><h2 id="变量的来历"><a href="#变量的来历" class="headerlink" title="变量的来历"></a>变量的来历</h2><p>程序运行过程中的数据都是保存在内存中，我们想要在代码中操作某个数据时就需要去内存上找到这个变量，但是如果我们直接在代码中通过内存地址去操作变量的话，代码的可读性会非常差而且还容易出错，所以我们就利用变量将这个数据的内存地址保存起来，以后直接通过这个变量就能找到内存上对应的数据了。</p>
-<h2 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h2><pre class="line-numbers language-bash"><code class="language-bash">$ 变量（Variable）的功能是存储数据。不同的变量保存的数据类型可能会不一样。经过半个多世纪的发展，编程语言已经基本形成了一套固定的类型，常见变量的数据类型有：整型、浮点型、布尔型等。
+                <h1 id="使用golang获取本机ip"><a href="#使用golang获取本机ip" class="headerlink" title="使用golang获取本机ip"></a>使用golang获取本机ip</h1><h2 id="话不多说，直接上代码"><a href="#话不多说，直接上代码" class="headerlink" title="话不多说，直接上代码"></a>话不多说，直接上代码</h2><pre class="line-numbers language-go"><code class="language-go"><span class="token keyword">package</span> main
 
-Go语言中的每一个变量都有自己的类型，并且变量必须经过声明才能开始使用。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><pre><code>import &quot;sync&quot;
-import &quot;sync/atomic&quot;
+<span class="token comment" spellcheck="true">// 获取本机全部网卡的全部IP</span>
+<span class="token comment" spellcheck="true">// 2020-03-12 16:52</span>
 
-var initialized uint32
-... // 此处省略
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">"fmt"</span>
+    <span class="token string">"fyne.io/fyne/app"</span>
+    <span class="token string">"fyne.io/fyne/widget"</span>
+    <span class="token string">"net"</span>
+<span class="token punctuation">)</span>
 
-func GetInstance() *singleton {
+<span class="token comment" spellcheck="true">//获取全部网卡的全部IP</span>
+<span class="token keyword">func</span> <span class="token function">Ips</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-if atomic.LoadUInt32(&amp;initialized) == 1 {  // 原子操作 
-        return instance
-  }
+    ips <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span>
 
-mu.Lock()
-defer mu.Unlock()
+    <span class="token comment" spellcheck="true">//返回 interface 结构体对象的列表，包含了全部网卡信息</span>
+    interfaces<span class="token punctuation">,</span> err <span class="token operator">:=</span> net<span class="token punctuation">.</span><span class="token function">Interfaces</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> err
+    <span class="token punctuation">}</span>
 
-if initialized == 0 {
-     instance = &amp;singleton{}
-     atomic.StoreUint32(&amp;initialized, 1)
-}
+    <span class="token comment" spellcheck="true">//遍历全部网卡</span>
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> i <span class="token operator">:=</span> <span class="token keyword">range</span> interfaces <span class="token punctuation">{</span>
 
-return instance</code></pre><p>}</p>
+        <span class="token comment" spellcheck="true">// Addrs() 方法返回一个网卡上全部的IP列表</span>
+        address<span class="token punctuation">,</span> err <span class="token operator">:=</span> i<span class="token punctuation">.</span><span class="token function">Addrs</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> err
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">//遍历一个网卡上全部的IP列表，组合为一个字符串，放入对应网卡名称的map中</span>
+        <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> address <span class="token punctuation">{</span>
+            ips<span class="token punctuation">[</span>i<span class="token punctuation">.</span>Name<span class="token punctuation">]</span> <span class="token operator">+=</span> v<span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> ips<span class="token punctuation">,</span> <span class="token boolean">nil</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">var</span> ips <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+    ips<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">=</span> <span class="token function">Ips</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> ipstring <span class="token builtin">string</span>
+
+    <span class="token comment" spellcheck="true">//key是网卡名称，value是网卡IP</span>
+    <span class="token keyword">for</span> k<span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> ips <span class="token punctuation">{</span>
+        ipstring <span class="token operator">+=</span> <span class="token string">"adapter name: "</span> <span class="token operator">+</span> k <span class="token operator">+</span> <span class="token string">"  IP: "</span> <span class="token operator">+</span> v <span class="token operator">+</span> <span class="token string">"\n"</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//使用 fyne 画到 GUI 界面上</span>
+    myApp <span class="token operator">:=</span> app<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    myWindow <span class="token operator">:=</span> myApp<span class="token punctuation">.</span><span class="token function">NewWindow</span><span class="token punctuation">(</span><span class="token string">"Network Info"</span><span class="token punctuation">)</span>
+    myWindow<span class="token punctuation">.</span><span class="token function">SetContent</span><span class="token punctuation">(</span>widget<span class="token punctuation">.</span><span class="token function">NewLabel</span><span class="token punctuation">(</span>ipstring<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    myWindow<span class="token punctuation">.</span><span class="token function">Show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    myApp<span class="token punctuation">.</span><span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">tidyUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">tidyUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Exited"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行效果如图</p>
+<p><img src="/2020/03/13/ips/macosxcode/Documents/blog/source/_posts/ips/ip.jpg" alt="ip"></p>
+<p>原文链接：</p>
+<p><a href="https://my.oschina.net/zuolinux/blog/3192664" target="_blank" rel="noopener">https://my.oschina.net/zuolinux/blog/3192664</a></p>
+<p>感谢大佬</p>
 
             </div>
             <hr/>
@@ -506,7 +552,7 @@ return instance</code></pre><p>}</p>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://moschao.github.io/2020/02/29/golang/">https://moschao.github.io/2020/02/29/golang/</a>
+                    <a href="https://moschao.github.io/2020/03/13/ips/">https://moschao.github.io/2020/03/13/ips/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -707,9 +753,10 @@ return instance</code></pre><p>}</p>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/03/13/ips/">
                     <div class="card-image">
@@ -735,9 +782,9 @@ import (
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-13
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -746,6 +793,7 @@ import (
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -756,24 +804,24 @@ import (
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/11/28/hello-world/">
+                <a href="/2020/02/29/golang/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="golang">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">golang</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            golang的基本语法变量的来历程序运行过程中的数据都是保存在内存中，我们想要在代码中操作某个数据时就需要去内存上找到这个变量，但是如果我们直接在代码中通过内存地址去操作变量的话，代码的可读性会非常差而且还容易出错，所以我们就利用变量将这个
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-29
                             </span>
                         <span class="publish-author">
                             

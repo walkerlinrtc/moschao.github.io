@@ -92,7 +92,7 @@ hr {
 }
 
 blockquote {
-    border-left: 5px solid #42b983;
+    border-left: 5px solid #41b7b9;
     padding: 1rem 0.8rem 0.2rem 0.8rem;
     color: #666;
     background-color: rgba(66, 185, 131, .1);
@@ -254,7 +254,7 @@ mark {
 }
 
 .text-color {
-    color: #0f9d58 !important;
+    color: #6c0a9d !important;
 }
 
 .white-color {
@@ -266,7 +266,7 @@ mark {
     position: fixed;
     bottom: 0;
     z-index: 300;
-    background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
+    background: linear-gradient(to right, #3ebf8d 0%, #46919d 100%);
     opacity: 0.8;
 }
 

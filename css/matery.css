@@ -250,12 +250,12 @@ mark {
 }
 
 .bg-color {
-    background-image: linear-gradient(to right, #623AA2 0%, #aeecf9 100%);
-    opacity: 0.8;
+    background-image: linear-gradient(to right, #503280 0%, #737e81 100%); //修改成自己喜欢的颜色值
+     opacity: 0.8;  //透明效果 值范围 0~1，看情况自己修改
 }
 
 .text-color {
-    color: #6c0a9d !important;
+    color: #8d7a9d !important;
 }
 
 .white-color {
@@ -267,7 +267,7 @@ mark {
     position: fixed;
     bottom: 0;
     z-index: 300;
-    background: linear-gradient(to right, #3ebf8d 0%, #46919d 100%);
+    background: linear-gradient(to right, #82b6bf 0%, #8f789d 100%);
     opacity: 0.8;
 }
 
@@ -1311,7 +1311,7 @@ thead {
 
 .chip-container .chip:hover {
     color: #fff;
-    background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%) !important;
+    background: linear-gradient(to right, #8e86bf 0%, #8d819d 100%) !important;
 }
 
 .chip .tag-length {
@@ -1365,7 +1365,7 @@ thead {
 #cd-timeline .day {
     position: relative;
     padding: 8px 10px;
-    background-color: #ffa726;
+    background-color: #b7ebff;
     color: #fff;
     font-size: 1.2rem;
     font-weight: 500;
@@ -1387,7 +1387,7 @@ thead {
     left: 18px;
     height: 100%;
     width: 4px;
-    background: #0f9d58;
+    background: #828e9d;
 }
 
 @media only screen and (min-width: 900px) {

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://moschao.github.io/"/>
-  <updated>2020-03-15T05:24:53.000Z</updated>
+  <updated>2020-03-31T10:00:26.000Z</updated>
   <id>https://moschao.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++之指针</title>
+    <link href="https://moschao.github.io/2020/03/31/c-zhi-zhi-zhen/"/>
+    <id>https://moschao.github.io/2020/03/31/c-zhi-zhi-zhen/</id>
+    <published>2020-03-31T09:33:14.000Z</published>
+    <updated>2020-03-31T10:00:26.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;c-之指针&quot;&gt;&lt;a href=&quot;#c-之指针&quot; class=&quot;headerlink&quot; title=&quot;c++之指针&quot;&gt;&lt;/a&gt;c++之指针&lt;/h1&gt;&lt;h2 id=&quot;1-c-指针概述&quot;&gt;&lt;a href=&quot;#1-c-指针概述&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="后端语言C++" scheme="https://moschao.github.io/categories/%E5%90%8E%E7%AB%AF%E8%AF%AD%E8%A8%80C/"/>
+    
+    
+      <category term="C++" scheme="https://moschao.github.io/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>golang中反射reflect示例</title>

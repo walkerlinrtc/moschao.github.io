@@ -459,7 +459,7 @@ int main ()
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我的电脑打印结果如下图</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/11.png" class title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/11.png" class="" title="运行结果">
 
 
 <p>整形数组name有10个元素，相邻两个元素之间的地址差值为4，是因为每个元素类型为int，占四个字节</p>
@@ -498,7 +498,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如下</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/12.png" class title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/12.png" class="" title="运行结果">
 
 
 <h2 id="4-C-Null指针"><a href="#4-C-Null指针" class="headerlink" title="4 C++ Null指针"></a>4 C++ Null指针</h2><p>在变量声明的时候，如果没有确切的地址可以赋值，为指针变量赋一个 NULL 值是一个良好的编程习惯。赋为 NULL 值的指针被称为<strong>空</strong>指针。</p>
@@ -513,7 +513,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如图</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/13.png" class title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/13.png" class="" title="运行结果">
 
 
 <p>在大多数的操作系统上，程序不允许访问地址为 0 的内存，因为该内存是操作系统保留的。然而，内存地址 0 有特别重要的意义，它表明该指针不指向一个可访问的内存位置。但按照惯例，如果指针包含空值（零值），则假定它不指向任何东西。</p>
@@ -550,7 +550,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如下图</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/14.png" class title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/14.png" class="" title="运行结果">
 
 <h3 id="5-3-递减一个指针"><a href="#5-3-递减一个指针" class="headerlink" title="5.3 递减一个指针"></a>5.3 递减一个指针</h3><p>同样地，对指针进行递减运算，即把值减去其数据类型的字节数，如下所示：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
@@ -579,7 +579,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如图</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/15.png" class title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/15.png" class="" title="运行结果">
 
 <h3 id="5-4-指针的比较"><a href="#5-4-指针的比较" class="headerlink" title="5.4 指针的比较"></a>5.4 指针的比较</h3><p>指针可以用关系运算符进行比较，如 ==、&lt; 和 &gt;。如果 p1 和 p2 指向两个相关的变量，比如同一个数组中的不同元素，则可对 p1 和 p2 进行大小比较。</p>
 <p>下面的程序修改了上面的实例，只要变量指针所指向的地址小于或等于数组的最后一个元素的地址 &amp;var[MAX - 1]，则把变量指针进行递增：</p>
@@ -611,7 +611,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如图</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/16.png" class title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/16.png" class="" title="运行结果">
 
 
 <h2 id="6-指针vs数组"><a href="#6-指针vs数组" class="headerlink" title="6 指针vs数组"></a>6 指针vs数组</h2><p>指针和数组是密切相关的。事实上，指针和数组在很多情况下是可以互换的。例如，一个指向数组开头的指针，可以通过使用指针的算术运算或数组索引来访问数组。请看下面的程序：</p>
@@ -707,7 +707,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如下：</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/17.png" class title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/17.png" class="" title="运行结果">
 
 
 <p>你也可以用一个指向字符的指针数组来存储一个字符串列表，如下：</p>
@@ -733,7 +733,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/18.png" class title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/18.png" class="" title="运行结果">
 
 
 <h2 id="8-指向指针的指针"><a href="#8-指向指针的指针" class="headerlink" title="8 指向指针的指针"></a>8 指向指针的指针</h2><p>指向指针的指针是一种多级间接寻址的形式，或者说是一个指针链。通常，一个指针包含一个变量的地址。当我们定义一个指向指针的指针时，第一个指针包含了第二个指针的地址，第二个指针指向包含实际值的位置。</p>
@@ -795,7 +795,7 @@ void getSeconds(unsigned long *par)
    *par = time( NULL );
    return;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<img src="/2020/03/31/c-zhi-zhi-zhen/19.png" class title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/19.png" class="" title="运行结果">
 
 
 <p>能接受指针作为参数的函数，也能接受数组作为参数，如下所示：</p>
@@ -1006,131 +1006,6 @@ int main ()
                 </div>
             </div>
             
-                <style>
-    #reward {
-        margin: 40px 0;
-        text-align: center;
-    }
-
-    #reward .reward-link {
-        font-size: 1.4rem;
-        line-height: 38px;
-    }
-
-    #reward .btn-floating:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    #rewardModal {
-        width: 320px;
-        height: 350px;
-    }
-
-    #rewardModal .reward-title {
-        margin: 15px auto;
-        padding-bottom: 5px;
-    }
-
-    #rewardModal .modal-content {
-        padding: 10px;
-    }
-
-    #rewardModal .close {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        color: rgba(0, 0, 0, 0.5);
-        font-size: 1.3rem;
-        line-height: 20px;
-        cursor: pointer;
-    }
-
-    #rewardModal .close:hover {
-        color: #ef5350;
-        transform: scale(1.3);
-        -moz-transform:scale(1.3);
-        -webkit-transform:scale(1.3);
-        -o-transform:scale(1.3);
-    }
-
-    #rewardModal .reward-tabs {
-        margin: 0 auto;
-        width: 210px;
-    }
-
-    .reward-tabs .tabs {
-        height: 38px;
-        margin: 10px auto;
-        padding-left: 0;
-    }
-
-    .reward-content ul {
-        padding-left: 0 !important;
-    }
-
-    .reward-tabs .tabs .tab {
-        height: 38px;
-        line-height: 38px;
-    }
-
-    .reward-tabs .tab a {
-        color: #fff;
-        background-color: #ccc;
-    }
-
-    .reward-tabs .tab a:hover {
-        background-color: #ccc;
-        color: #fff;
-    }
-
-    .reward-tabs .wechat-tab .active {
-        color: #fff !important;
-        background-color: #22AB38 !important;
-    }
-
-    .reward-tabs .alipay-tab .active {
-        color: #fff !important;
-        background-color: #019FE8 !important;
-    }
-
-    .reward-tabs .reward-img {
-        width: 210px;
-        height: 210px;
-    }
-</style>
-
-<div id="reward">
-    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
-
-    <!-- Modal Structure -->
-    <div id="rewardModal" class="modal">
-        <div class="modal-content">
-            <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
-            <div class="reward-content">
-                <div class="reward-tabs">
-                    <ul class="tabs row">
-                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
-                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
-                    </ul>
-                    <div id="alipay">
-                        <img src="https://cdn.jsdelivr.net/gh/moschao/moschao.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
-                    </div>
-                    <div id="wechat">
-                        <img src="https://cdn.jsdelivr.net/gh/moschao/moschao.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    $(function () {
-        $('.tabs').tabs();
-    });
-</script>
-            
         </div>
     </div>
 
@@ -1175,48 +1050,53 @@ int main ()
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/31/c-zhi-zhi-zhen/">
+                <a href="/2020/04/01/java-shi-xian-yue-li-da-yin/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/moschao/moschao.github.io/medias/featureimages/3.jpg" class="responsive-img" alt="C++之指针">
+                        <img src="https://cdn.jsdelivr.net/gh/moschao/moschao.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="java实现月历打印">
                         
-                        <span class="card-title">C++之指针</span>
+                        <span class="card-title">java实现月历打印</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            c++之指针1. c++指针概述其实，早在c语言中我们就已经学习过指针了 ，C++也大差不差。说白了，指针就是地址，即指针变量它存储的内容是某一个内存单元的地址。那什么是地址呢？在计算机的内存中，一个字节，也就是8位称为一个内存单元，所有的
+                            用java实现打印任意年份的月历直接上代码package main;
+
+/**
+ * @author moschao
+ * @date 2020/4/1 11:11
+ */
+import java.util.Scanner;
+public 
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-31
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-01
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%90%8E%E7%AB%AF%E8%AF%AD%E8%A8%80C/" class="post-category">
-                                    后端语言C++
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E8%AF%AD%E8%A8%80java/" class="post-category">
+                                    后端语言java
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/C/">
-                        <span class="chip bg-color">C++</span>
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
                     </a>
                     
                 </div>
@@ -1501,7 +1381,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">4.4k</span>&nbsp;字
+                class="white-color">5.5k</span>&nbsp;字
             
             
             
@@ -1592,6 +1472,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
+
+    <a href="https://www.zhihu.com/people/ru-hai-fei-yu" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/ru-hai-fei-yu" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
 
 
 

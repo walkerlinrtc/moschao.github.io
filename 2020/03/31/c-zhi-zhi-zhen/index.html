@@ -729,7 +729,7 @@ int main ()
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我的电脑打印结果如下图</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/11.png" class="" title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/11.png" class title="运行结果">
 
 
 <p>整形数组name有10个元素，相邻两个元素之间的地址差值为4，是因为每个元素类型为int，占四个字节</p>
@@ -768,7 +768,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如下</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/12.png" class="" title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/12.png" class title="运行结果">
 
 
 <h2 id="4-C-Null指针"><a href="#4-C-Null指针" class="headerlink" title="4 C++ Null指针"></a>4 C++ Null指针</h2><p>在变量声明的时候，如果没有确切的地址可以赋值，为指针变量赋一个 NULL 值是一个良好的编程习惯。赋为 NULL 值的指针被称为<strong>空</strong>指针。</p>
@@ -783,7 +783,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如图</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/13.png" class="" title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/13.png" class title="运行结果">
 
 
 <p>在大多数的操作系统上，程序不允许访问地址为 0 的内存，因为该内存是操作系统保留的。然而，内存地址 0 有特别重要的意义，它表明该指针不指向一个可访问的内存位置。但按照惯例，如果指针包含空值（零值），则假定它不指向任何东西。</p>
@@ -820,7 +820,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如下图</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/14.png" class="" title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/14.png" class title="运行结果">
 
 <h3 id="5-3-递减一个指针"><a href="#5-3-递减一个指针" class="headerlink" title="5.3 递减一个指针"></a>5.3 递减一个指针</h3><p>同样地，对指针进行递减运算，即把值减去其数据类型的字节数，如下所示：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
@@ -849,7 +849,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如图</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/15.png" class="" title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/15.png" class title="运行结果">
 
 <h3 id="5-4-指针的比较"><a href="#5-4-指针的比较" class="headerlink" title="5.4 指针的比较"></a>5.4 指针的比较</h3><p>指针可以用关系运算符进行比较，如 ==、&lt; 和 &gt;。如果 p1 和 p2 指向两个相关的变量，比如同一个数组中的不同元素，则可对 p1 和 p2 进行大小比较。</p>
 <p>下面的程序修改了上面的实例，只要变量指针所指向的地址小于或等于数组的最后一个元素的地址 &amp;var[MAX - 1]，则把变量指针进行递增：</p>
@@ -881,7 +881,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如图</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/16.png" class="" title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/16.png" class title="运行结果">
 
 
 <h2 id="6-指针vs数组"><a href="#6-指针vs数组" class="headerlink" title="6 指针vs数组"></a>6 指针vs数组</h2><p>指针和数组是密切相关的。事实上，指针和数组在很多情况下是可以互换的。例如，一个指向数组开头的指针，可以通过使用指针的算术运算或数组索引来访问数组。请看下面的程序：</p>
@@ -977,7 +977,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如下：</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/17.png" class="" title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/17.png" class title="运行结果">
 
 
 <p>你也可以用一个指向字符的指针数组来存储一个字符串列表，如下：</p>
@@ -1003,7 +1003,7 @@ int main ()
    return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果</p>
-<img src="/2020/03/31/c-zhi-zhi-zhen/18.png" class="" title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/18.png" class title="运行结果">
 
 
 <h2 id="8-指向指针的指针"><a href="#8-指向指针的指针" class="headerlink" title="8 指向指针的指针"></a>8 指向指针的指针</h2><p>指向指针的指针是一种多级间接寻址的形式，或者说是一个指针链。通常，一个指针包含一个变量的地址。当我们定义一个指向指针的指针时，第一个指针包含了第二个指针的地址，第二个指针指向包含实际值的位置。</p>
@@ -1065,7 +1065,7 @@ void getSeconds(unsigned long *par)
    *par = time( NULL );
    return;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<img src="/2020/03/31/c-zhi-zhi-zhen/19.png" class="" title="运行结果">
+<img src="/2020/03/31/c-zhi-zhi-zhen/19.png" class title="运行结果">
 
 
 <p>能接受指针作为参数的函数，也能接受数组作为参数，如下所示：</p>
@@ -1839,6 +1839,11 @@ $(function () {
     <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
     <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
     <script type="text/javascript" src="/js/fireworks.js"></script>
+    <!-- demo -->
+    <script type="text/javascript">
+        WIDGET = {FID: 'Kx0rhEIodg'}
+    </script>
+    <script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
 </body>
 
 </html>

@@ -137,7 +137,7 @@ pre {
 code {
     padding: 1px 5px;
     top: 16px !important;
-    font-family:  Monaco;
+    font-family: Monaco, monospace;
     font-size: 0.91rem;
     color: #e96900;
     background-color: #f8f8f8;
@@ -168,7 +168,7 @@ code {
     right: 46px;
     line-height: 0;
     font-weight: bold;
-    font-family: normal;
+    font-family: normal, monospace;
     z-index: 1;
     filter: invert(50%);
     cursor: pointer;

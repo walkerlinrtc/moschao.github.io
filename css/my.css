@@ -9,14 +9,7 @@
     margin: 0 3px !important;
     padding: 0;
 }
-@font-face{
-    font-family: 'kaiti';
-    src: url('../font/myfont.ttf');
-}
 
-body{
-    font-family: 'myfont';
-}
 .github-emoji:hover{
     animation: emoji-face 5s infinite ease-in-out;
 }

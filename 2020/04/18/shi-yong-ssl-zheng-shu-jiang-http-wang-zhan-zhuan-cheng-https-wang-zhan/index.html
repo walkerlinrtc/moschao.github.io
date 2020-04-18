@@ -517,7 +517,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/source/images/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/source/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -722,7 +722,7 @@
 <h2 id="2-申请SSL证书"><a href="#2-申请SSL证书" class="headerlink" title="2. 申请SSL证书"></a>2. 申请SSL证书</h2><p>大多数企业级的SSL证书都是要钱的，而且对于个人开发者来说都不便宜。我使用的SSL证书是免费的，用的阿里云；另外有一些也是免费的，比如七牛云、腾讯云等，都有提供免费证书的申请接口。</p>
 <p>传送门</p>
 <p><a href="https://common-buy.aliyun.com/?spm=a2c4e.11153940.0.0.2557748fMtvgVX&commodityCode=cas#/buy" target="_blank" rel="noopener">阿里云免费SSL证书购买地址</a></p>
-<p><img src="/2020/04/18/shi-yong-ssl-zheng-shu-jiang-http-wang-zhan-zhuan-cheng-https-wang-zhan/ssl.png" class title="购买证书 % }&lt;&#x2F;p&gt; &lt;p&gt;如箭头所示，选择免费版（个人）DV，然后点立即购买–&gt;同意云盾证书服务协议–&gt;去支付,支付成功后去证书控制台进行配置。&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img zhifu.png 支付 % }&lt;&#x2F;p&gt; &lt;p&gt;接下来点击证书申请，如下图：&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img shenqing.png 申请 % }&lt;&#x2F;p&gt; &lt;p&gt;填写相关信息，包括证书要绑定的域名等，如下图&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img message.png 填写申请 % }&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img moren.png 这里默认就行 % }&lt;&#x2F;p&gt; &lt;p&gt;接着，下一步–&gt;验证–&gt;提交审核，签发后是这个样子，如图：&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img download.png 下载证书 % }&lt;&#x2F;p&gt; &lt;p&gt;点击下载，下载证书和密钥，找到对应的服务器类型下载就行，我的阿里云装的nginx，我以nginx为例&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img 001.png 下载 % }&lt;&#x2F;p&gt; &lt;p&gt;下载后得到一个压缩包，解压后里面有两个文件：&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img 002.png 证书和密钥 % }&lt;&#x2F;p&gt; &lt;p&gt;先放着，待会有用&lt;&#x2F;p&gt; &lt;p&gt;回到证书签发页面，点击部署，选择负载均衡&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img 003.png 负载均衡 % }&lt;&#x2F;p&gt; &lt;p&gt;选择你服务器所在的地方&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img 004.png 你服务器所在地 % }&lt;&#x2F;p&gt; &lt;h2 id&#x3D;3-安装SSL证书&gt;&lt;a href&#x3D;#3-安装SSL证书 class&#x3D;headerlink title&#x3D;3. 安装SSL证书&gt;&lt;&#x2F;a&gt;3. 安装SSL证书&lt;&#x2F;h2&gt;&lt;p&gt;在阿里云你的nginx的安装目录下创建文件夹cert,我的路径是 &#x2F;etc&#x2F;nginx&lt;&#x2F;p&gt; <pre class="line-numbers language- shell"><code class="language- shell">cd /etc/nginx/
+<p><img src="/2020/04/18/shi-yong-ssl-zheng-shu-jiang-http-wang-zhan-zhuan-cheng-https-wang-zhan/ssl.png" class title="购买证书 % }&lt;&#x2F;p&gt; &lt;p&gt;如箭头所示，选择免费版（个人）DV，然后点立即购买,同意云盾证书服务协议,去支付,支付成功后去证书控制台进行配置。&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img zhifu.png 支付 % }&lt;&#x2F;p&gt; &lt;p&gt;接下来点击证书申请，如下图：&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img shenqing.png 申请 % }&lt;&#x2F;p&gt; &lt;p&gt;填写相关信息，包括证书要绑定的域名等，如下图&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img message.png 填写申请 % }&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img moren.png 这里默认就行 % }&lt;&#x2F;p&gt; &lt;p&gt;接着，下一步–&gt;验证–&gt;提交审核，签发后是这个样子，如图：&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img download.png 下载证书 % }&lt;&#x2F;p&gt; &lt;p&gt;点击下载，下载证书和密钥，找到对应的服务器类型下载就行，我的阿里云装的nginx，我以nginx为例&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img 001.png 下载 % }&lt;&#x2F;p&gt; &lt;p&gt;下载后得到一个压缩包，解压后里面有两个文件：&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img 002.png 证书和密钥 % }&lt;&#x2F;p&gt; &lt;p&gt;先放着，待会有用&lt;&#x2F;p&gt; &lt;p&gt;回到证书签发页面，点击部署，选择负载均衡&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img 003.png 负载均衡 % }&lt;&#x2F;p&gt; &lt;p&gt;选择你服务器所在的地方&lt;&#x2F;p&gt; &lt;p&gt;{% asset_img 004.png 你服务器所在地 % }&lt;&#x2F;p&gt; &lt;h2 id&#x3D;3-安装SSL证书&gt;&lt;a href&#x3D;#3-安装SSL证书 class&#x3D;headerlink title&#x3D;3. 安装SSL证书&gt;&lt;&#x2F;a&gt;3. 安装SSL证书&lt;&#x2F;h2&gt;&lt;p&gt;在阿里云你的nginx的安装目录下创建文件夹cert,我的路径是 &#x2F;etc&#x2F;nginx&lt;&#x2F;p&gt; <pre class="line-numbers language- shell"><code class="language- shell">cd /etc/nginx/
 mkdir cert
 cd cert
 vim server.pem    //得到一个空文件，然后用Sublime Text或者notpad++打开刚才下载的以.pem为后缀的文件，将里面的内容全部复制到新创建的server.pem文件中，保存退出
@@ -882,7 +882,7 @@ vim server.key    //同理，将刚才下载的.key文件中的内容复制到se
                 <a href="/2020/04/18/shi-yong-ssl-zheng-shu-jiang-http-wang-zhan-zhuan-cheng-https-wang-zhan/">
                     <div class="card-image">
                         
-                        <img src="/source/images/12.jpg" class="responsive-img" alt="使用SSL证书将http网站转成https网站">
+                        <img src="/source/medias/featureimages/12.jpg" class="responsive-img" alt="使用SSL证书将http网站转成https网站">
                         
                         <span class="card-title">使用SSL证书将http网站转成https网站</span>
                     </div>
@@ -934,7 +934,7 @@ http是互联网上应用最为广泛的一种网络协议，是一个客户端�
                 <a href="/2020/04/18/jiang-hexo-bo-ke-bu-shu-dao-a-li-yun/">
                     <div class="card-image">
                         
-                        <img src="/source/images/11.jpg" class="responsive-img" alt="将hexo部署到阿里云">
+                        <img src="/source/medias/featureimages/11.jpg" class="responsive-img" alt="将hexo部署到阿里云">
                         
                         <span class="card-title">将hexo部署到阿里云</span>
                     </div>
